@@ -541,17 +541,19 @@ body {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border-radius: var(--radius-lg);
-  z-index: 10;
+  z-index: 50;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
   transform: translateY(105%);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .history-panel.open {
   transform: translateY(0%);
+  pointer-events: auto;
 }
 
 .history-header {
@@ -560,6 +562,8 @@ body {
   align-items: center;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--card-border);
+  position: relative;
+  z-index: 60;
 }
 
 .history-title-group {
@@ -572,15 +576,18 @@ body {
   background: var(--btn-num-bg);
   border: 1px solid var(--btn-num-border);
   color: var(--text-main);
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 8px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 500;
   font-family: var(--font-sans);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  position: relative;
+  z-index: 70;
+  touch-action: manipulation;
   transition: all var(--transition-fast);
 }
 

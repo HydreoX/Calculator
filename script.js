@@ -559,17 +559,28 @@ function toggleHistoryPanel(forceState = null) {
 }
 window.toggleHistoryPanel = toggleHistoryPanel;
 
-historyToggleBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  toggleHistoryPanel();
-});
-
-if (closeHistoryBtn) {
-  closeHistoryBtn.addEventListener('click', (e) => {
+function handleHistoryToggle(e) {
+  if (e) {
     e.stopPropagation();
     e.preventDefault();
-    toggleHistoryPanel(false);
-  });
+  }
+  toggleHistoryPanel();
+}
+
+function handleHistoryClose(e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  calc.playSound('click');
+  toggleHistoryPanel(false);
+}
+
+historyToggleBtn.addEventListener('click', handleHistoryToggle);
+
+if (closeHistoryBtn) {
+  closeHistoryBtn.addEventListener('click', handleHistoryClose);
+  closeHistoryBtn.addEventListener('touchend', handleHistoryClose);
 }
 
 clearHistoryBtn.addEventListener('click', (e) => {
@@ -577,8 +588,14 @@ clearHistoryBtn.addEventListener('click', (e) => {
   calc.clearHistory();
 });
 
-// Close history panel if clicked outside
+// Close history panel if clicked outside or on any element with data-close-history
 document.addEventListener('click', (e) => {
+  const isCloseBtn = e.target.closest('#close-history-btn') || e.target.closest('[data-close-history]');
+  if (isCloseBtn) {
+    handleHistoryClose(e);
+    return;
+  }
+
   if (historyPanel.classList.contains('open') &&
       !historyPanel.contains(e.target) &&
       !historyToggleBtn.contains(e.target)) {

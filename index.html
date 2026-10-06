@@ -14,7 +14,7 @@
   <!-- Phosphor Icons for modern sleek iconography -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
-  <link rel="stylesheet" href="style.css?v=1.1">
+  <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body class="theme-dark">
   <!-- Background Ambient Glow Shapes -->
@@ -49,7 +49,7 @@
       <aside class="history-panel" id="history-panel" aria-hidden="true">
         <div class="history-header">
           <div class="history-title-group">
-            <button type="button" id="close-history-btn" class="back-history-btn" title="Back to Calculator" aria-label="Back to Calculator" onclick="toggleHistoryPanel(false)">
+            <button type="button" id="close-history-btn" class="back-history-btn" data-close-history="true" title="Back to Calculator" aria-label="Back to Calculator" onclick="toggleHistoryPanel(false)">
               <i class="ph ph-arrow-left"></i>
               <span>Back</span>
             </button>
@@ -124,6 +124,6 @@
   <!-- Toast notification for actions -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=1.1"></script>
+  <script src="script.js?v=1.2"></script>
 </body>
 </html>

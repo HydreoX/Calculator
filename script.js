@@ -424,6 +424,7 @@ const resultEl = document.getElementById('result-display');
 const historyListEl = document.getElementById('history-list');
 const historyPanel = document.getElementById('history-panel');
 const historyToggleBtn = document.getElementById('history-toggle-btn');
+const closeHistoryBtn = document.getElementById('close-history-btn');
 const clearHistoryBtn = document.getElementById('clear-history-btn');
 const soundToggleBtn = document.getElementById('sound-toggle-btn');
 const soundIcon = document.getElementById('sound-icon');
@@ -522,7 +523,14 @@ window.addEventListener('keydown', (e) => {
   } else if (e.key === 'Backspace') {
     calc.deleteDigit();
     btnToHighlight = document.getElementById('btn-delete');
-  } else if (e.key === 'Escape' || e.key.toLowerCase() === 'c') {
+  } else if (e.key === 'Escape') {
+    if (historyPanel.classList.contains('open')) {
+      toggleHistoryPanel(false);
+    } else {
+      calc.clear();
+      btnToHighlight = document.getElementById('btn-clear');
+    }
+  } else if (e.key.toLowerCase() === 'c') {
     calc.clear();
     btnToHighlight = document.getElementById('btn-clear');
   } else if (e.key === '%') {
@@ -551,6 +559,9 @@ function toggleHistoryPanel(forceState = null) {
 }
 
 historyToggleBtn.addEventListener('click', () => toggleHistoryPanel());
+if (closeHistoryBtn) {
+  closeHistoryBtn.addEventListener('click', () => toggleHistoryPanel(false));
+}
 clearHistoryBtn.addEventListener('click', () => calc.clearHistory());
 
 // Close history panel if clicked outside

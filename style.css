@@ -562,6 +562,39 @@ body {
   border-bottom: 1px solid var(--card-border);
 }
 
+.history-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.back-history-btn {
+  background: var(--btn-num-bg);
+  border: 1px solid var(--btn-num-border);
+  color: var(--text-main);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all var(--transition-fast);
+}
+
+.back-history-btn:hover {
+  background: var(--btn-action-bg);
+  color: var(--btn-action-text);
+  border-color: var(--btn-action-border);
+  transform: translateX(-2px);
+}
+
+.back-history-btn:active {
+  transform: scale(0.94);
+}
+
 .history-header h3 {
   font-size: 1rem;
   font-weight: 600;

@@ -48,7 +48,13 @@
       <!-- History Drawer (Flyout / Overlay inside card) -->
       <aside class="history-panel" id="history-panel" aria-hidden="true">
         <div class="history-header">
-          <h3><i class="ph ph-clock"></i> History</h3>
+          <div class="history-title-group">
+            <button id="close-history-btn" class="back-history-btn" title="Back to Calculator" aria-label="Back to Calculator">
+              <i class="ph ph-arrow-left"></i>
+              <span>Back</span>
+            </button>
+            <h3><i class="ph ph-clock"></i> History</h3>
+          </div>
           <button id="clear-history-btn" class="clear-history-btn" title="Clear History">
             <i class="ph ph-trash"></i> Clear
           </button>

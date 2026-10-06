@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A sleek, modern, and beautifully crafted calculator with smooth animations, history tracking, and keyboard support.">
+  <title>Modern Calculator</title>
+  
+  <!-- Google Fonts: Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons for modern sleek iconography -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-dark">
+  <!-- Background Ambient Glow Shapes -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <main class="calculator-app">
+    <div class="calculator-container" id="calculator">
+      
+      <!-- Top Control Bar -->
+      <header class="calc-header">
+        <div class="brand">
+          <span class="brand-badge"><i class="ph ph-sparkle"></i></span>
+          <span class="brand-title">CALC</span>
+        </div>
+
+        <div class="header-actions">
+          <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound Feedback" aria-label="Toggle Sound Feedback">
+            <i class="ph ph-speaker-high" id="sound-icon"></i>
+          </button>
+          <button id="history-toggle-btn" class="icon-btn" title="Calculation History" aria-label="Toggle Calculation History">
+            <i class="ph ph-clock-counter-clockwise"></i>
+          </button>
+          <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme" aria-label="Toggle Theme">
+            <i class="ph ph-sun" id="theme-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- History Drawer (Flyout / Overlay inside card) -->
+      <aside class="history-panel" id="history-panel" aria-hidden="true">
+        <div class="history-header">
+          <h3><i class="ph ph-clock"></i> History</h3>
+          <button id="clear-history-btn" class="clear-history-btn" title="Clear History">
+            <i class="ph ph-trash"></i> Clear
+          </button>
+        </div>
+        <div class="history-list" id="history-list">
+          <div class="empty-history">
+            <i class="ph ph-calculator"></i>
+            <p>No calculations yet</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Display Screen Area -->
+      <section class="display-section" id="display-section" title="Click to copy result">
+        <div class="expression-display" id="expression-display">0</div>
+        <div class="result-wrapper">
+          <div class="result-display" id="result-display">0</div>
+          <button class="copy-badge" id="copy-btn" title="Copy result">
+            <i class="ph ph-copy" id="copy-icon"></i>
+            <span class="copy-text" id="copy-tooltip">Copy</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Keypad Grid -->
+      <section class="keypad" id="keypad">
+        <!-- Row 1: Quick functions -->
+        <button type="button" class="btn btn-action" data-action="clear" id="btn-clear" aria-label="All Clear">AC</button>
+        <button type="button" class="btn btn-action" data-action="delete" id="btn-delete" aria-label="Delete last digit">
+          <i class="ph ph-backspace"></i>
+        </button>
+        <button type="button" class="btn btn-action" data-action="percent" id="btn-percent" aria-label="Percent">%</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="÷" id="btn-divide" aria-label="Divide">÷</button>
+
+        <!-- Row 2: 7, 8, 9, Multiply -->
+        <button type="button" class="btn btn-num" data-action="number" data-value="7" id="btn-7">7</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="8" id="btn-8">8</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="9" id="btn-9">9</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="×" id="btn-multiply" aria-label="Multiply">×</button>
+
+        <!-- Row 3: 4, 5, 6, Subtract -->
+        <button type="button" class="btn btn-num" data-action="number" data-value="4" id="btn-4">4</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="5" id="btn-5">5</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="6" id="btn-6">6</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="-" id="btn-subtract" aria-label="Subtract">−</button>
+
+        <!-- Row 4: 1, 2, 3, Add -->
+        <button type="button" class="btn btn-num" data-action="number" data-value="1" id="btn-1">1</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="2" id="btn-2">2</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="3" id="btn-3">3</button>
+        <button type="button" class="btn btn-operator" data-action="operator" data-value="+" id="btn-add" aria-label="Add">+</button>
+
+        <!-- Row 5: Negate, 0, Decimal, Equals -->
+        <button type="button" class="btn btn-num-util" data-action="negate" id="btn-negate" aria-label="Negate">±</button>
+        <button type="button" class="btn btn-num" data-action="number" data-value="0" id="btn-0">0</button>
+        <button type="button" class="btn btn-num-util" data-action="decimal" id="btn-decimal" aria-label="Decimal Point">.</button>
+        <button type="button" class="btn btn-equals" data-action="equals" id="btn-equals" aria-label="Calculate">=</button>
+      </section>
+
+      <!-- Keyboard shortcuts helper pill -->
+      <footer class="calc-footer">
+        <span class="hint-text"><i class="ph ph-keyboard"></i> Keyboard supported</span>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Toast notification for actions -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

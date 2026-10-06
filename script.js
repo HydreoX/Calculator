@@ -557,12 +557,25 @@ function toggleHistoryPanel(forceState = null) {
     historyToggleBtn.classList.remove('active');
   }
 }
+window.toggleHistoryPanel = toggleHistoryPanel;
 
-historyToggleBtn.addEventListener('click', () => toggleHistoryPanel());
+historyToggleBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleHistoryPanel();
+});
+
 if (closeHistoryBtn) {
-  closeHistoryBtn.addEventListener('click', () => toggleHistoryPanel(false));
+  closeHistoryBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    toggleHistoryPanel(false);
+  });
 }
-clearHistoryBtn.addEventListener('click', () => calc.clearHistory());
+
+clearHistoryBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  calc.clearHistory();
+});
 
 // Close history panel if clicked outside
 document.addEventListener('click', (e) => {

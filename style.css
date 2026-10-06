@@ -595,6 +595,10 @@ body {
   transform: scale(0.94);
 }
 
+.back-history-btn *, .clear-history-btn * {
+  pointer-events: none;
+}
+
 .history-header h3 {
   font-size: 1rem;
   font-weight: 600;
